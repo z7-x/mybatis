@@ -1,0 +1,63 @@
+server:
+  port: 6060
+spring:
+  #数据库连接配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://47.102.130.47:31735/test?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    username: root
+    password: qwer1234
+  redis:
+    database: 12
+    host: 47.102.130.47
+    port: 32482
+    password: 123456
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    timeout: 0
+
+# mybatis的相关配置
+mybatis:
+  # 扫描 mapper.xml
+  mapper-locations: classpath:mapper/*.xml
+  # 配置类名所在的包名  可直接写类名即可
+  type-aliases-package: com.example.mybatis.pojo.*
+  # 开启驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+#  # 自动化创建数据库表
+#  table:
+#    auto: update
+#  model:
+#    pack: com.example.mybatis.pojo #扫描用于创建表的对象的包名，多个包用“,”隔开
+#  database:
+#    type: mysql
+
+# 配置日志信息
+logging:
+  level:
+    com:
+      example:
+        mybatis:
+          mapper: debug
+
+#grpc相关配置
+grpc:
+  server:
+    port: 9099 #默认端口9090
+
+# Swagger2界面内容配置
+swagger:
+  title: Mybatis服务API文档
+  description: Mybatis Api Documentation
+  version: 1.0.0
+  termsOfServiceUrl: https://github.com/z7-x
+  contact:
+    name: z7
+    url: https://github.com/z7-x
+    email: 40620862@qq.com

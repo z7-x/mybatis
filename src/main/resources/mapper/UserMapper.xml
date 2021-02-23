@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatis.mapper.UserMapper">
+
+    <select id="findAll" resultType="com.example.mybatis.pojo.User">
+        SELECT * FROM mybatis_user
+    </select>
+
+    <insert id="addUser" parameterType="com.example.mybatis.pojo.User">
+        insert into mybatis_user(user_name,pass_word) values(#{userName},#{passWord})
+    </insert>
+
+    <delete id="removeUser" parameterType="java.lang.Long">
+            delete from mybatis_user where id = #{id}
+        </delete>
+
+    <update id="updateUser" parameterType="com.example.mybatis.pojo.User">
+        update mybatis_user mu set
+        <if test="userName !=null">mu.user_name = #{userName},</if>
+        <if test="passWord !=null">mu.pass_word = #{passWord}</if>
+        where mu.id = #{id}
+    </update>
+
+    <select id="findUserById" resultType="com.example.mybatis.pojo.User">
+        select * from mybatis_user where id = #{id}
+    </select>
+
+    <select id="getUserRoleList" resultMap="userRoleMap">
+        select a.id,a.user_name,c.role_name from mybatis_user a
+        inner join mybatis_user_role b on  a.id = b.user_id
+        inner join mybatis_role c on c.id = b.role_id
+    </select>
+
+    <resultMap id="userRoleMap" type="com.example.mybatis.pojo.User">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="passWord" column="pass_word"/>
+        <collection property="roles" ofType="com.example.mybatis.pojo.Role">
+            <id property="id" column="id"/>
+            <result property="roleName" column="role_name"/>
+        </collection>
+    </resultMap>
+</mapper>

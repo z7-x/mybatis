@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatis.mapper.RoleMapper">
+
+    <select id="getRoleUserList" parameterType="map" resultMap="roleUserMap">
+        select * from mybatis_role mr
+        inner join mybatis_user_role mur on mr.id = mur.role_id
+        inner join mybatis_user mu on mu.id = mur.user_id
+        limit  #{currIndex} , #{pageSize}
+    </select>
+
+    <resultMap id="roleUserMap" type="com.example.mybatis.pojo.Role">
+        <id property="id" column="id"/>
+        <result property="roleName" column="role_name"/>
+        <collection property="users" resultMap="userMap"></collection>
+        <collection property="permissions" resultMap="rolePermissionMap"></collection>
+    </resultMap>
+
+    <resultMap id="userMap" type="com.example.mybatis.pojo.User">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="passWord" column="pass_word"/>
+    </resultMap>
+
+
+    <select id="getRolePermissionList" resultMap="roleUserMap">
+        select * from mybatis_role mr
+        inner join mybatis_role_permission mrp on mr.id = mrp.role_id
+        inner join mybatis_permission mp on mp.id = mrp.permission_id
+    </select>
+
+    <resultMap id="rolePermissionMap" type="com.example.mybatis.pojo.Permission">
+        <id property="id" column="id"></id>
+        <result property="permissionName" column="permission_name"></result>
+    </resultMap>
+
+</mapper>
