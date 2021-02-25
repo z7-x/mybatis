@@ -3,7 +3,7 @@ package com.example.mybatis.controller;
 
 import com.example.mybatis.pojo.User;
 import com.example.mybatis.service.UserService;
-import com.example.mybatis.utils.common.ResultData;
+import com.example.mybatis.utils.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -28,8 +28,10 @@ public class UserController {
 
     @ApiOperation(value = "用户角色列表", notes = "查询所有用户对应的角色列表")
     @RequestMapping(value = "/getUserRoles", method = RequestMethod.GET)
-    public ResultData getUserRoleList() {
-        ResultData<List<User>> listResultData = new ResultData<>(userService.getUserRoleList());
+    public Result getUserRoleList() {
+        List<User> userRoleList = userService.getUserRoleList();
+        Result<List<User>> listResultData = new Result<>();
+        listResultData.setData(userRoleList);
         return listResultData;
     }
 
