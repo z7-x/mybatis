@@ -1,0 +1,4 @@
+spring
+for information about minimum requirements, guidance on upgrading
+from earlier versions and support policies, please check out the official
+spring framework wiki page level

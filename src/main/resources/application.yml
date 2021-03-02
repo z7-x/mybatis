@@ -25,6 +25,8 @@ spring:
 mybatis:
   # 扫描 mapper.xml
   mapper-locations: classpath:mapper/*.xml
+  # 扫描到 mybatis.xml 核心配置文件
+  config-location: classpath:mybatis.xml
   # 配置类名所在的包名  可直接写类名即可
   type-aliases-package: com.example.mybatis.pojo.*
   # 开启驼峰命名

@@ -1,0 +1,10 @@
+a key element of
+spring
+is infrastructural support at the
+application
+level
+spring
+focuses on the "plumbing" of enterprise applications so that teams can focus on
+application
+level
+business logic, without unnecessary ties to specific deployment environments.

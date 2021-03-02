@@ -117,6 +117,13 @@
             <version>2.6</version>
         </dependency>
 
+        <!--FileUtils-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+
         <!--Grpc-->
         <dependency>
             <groupId>net.devh</groupId>
@@ -171,6 +178,14 @@
             <artifactId>lucene-analyzers-smartcn</artifactId>
             <version>7.6.0</version>
         </dependency>
+        <!--ik分词器-->
+        <!-- https://mvnrepository.com/artifact/com.jianggujin/IKAnalyzer-lucene -->
+        <dependency>
+            <groupId>com.jianggujin</groupId>
+            <artifactId>IKAnalyzer-lucene</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+
 
 
         <dependency>
