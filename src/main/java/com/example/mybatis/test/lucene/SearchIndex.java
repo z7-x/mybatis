@@ -38,8 +38,8 @@ public class SearchIndex {
     }
 
     /**
-     * 范围查询
-     *
+     * 查询 范围查询
+     * 查询文件的大小范围
      * @throws Exception
      */
     @Test
@@ -50,7 +50,7 @@ public class SearchIndex {
     }
 
     /**
-     * s 查询
+     * 查询 万能搜索
      *
      * @throws Exception
      */
@@ -59,7 +59,7 @@ public class SearchIndex {
         //创建QueryParser 参数一：默认搜索域 参数二：分词器对象
         QueryParser queryParser = new QueryParser("content", new IKAnalyzer());
         //创建一个Query对象
-        Query query = queryParser.parse("level");
+        Query query = queryParser.parse("的");
         printResult(query);
     }
 
@@ -68,11 +68,11 @@ public class SearchIndex {
         //执行查询
         TopDocs topDocs = indexSearcher.search(query, 10);
         System.out.println("总记录数" + topDocs.totalHits);
-        Arrays.stream(topDocs.scoreDocs).forEach(scoreDoc -> {
-            //取文档id
+        ScoreDoc[] scoreDocs = topDocs.scoreDocs;
+        for (ScoreDoc scoreDoc : scoreDocs) {//取文档id
             int doc = scoreDoc.doc;
-            //根据文档id取文档对象
             try {
+                //根据文档id取文档对象
                 Document document = indexSearcher.doc(doc);
                 System.out.println(document.get("name"));
                 System.out.println(document.get("path"));
@@ -82,7 +82,7 @@ public class SearchIndex {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+        }
         indexReader.close();
     }
 }

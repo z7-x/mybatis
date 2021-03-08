@@ -42,5 +42,10 @@ public interface ILuceneDao {
      */
     void deleteProductIndexById(String id) throws IOException;
 
-
+    /**
+     * 通过单个搜索域 查询索引
+     * @param pram
+     * @return
+     */
+    List<Product> searchProduct(String pram) throws IOException, ParseException;
 }

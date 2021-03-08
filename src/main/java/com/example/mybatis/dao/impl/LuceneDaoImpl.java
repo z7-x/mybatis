@@ -2,6 +2,7 @@ package com.example.mybatis.dao.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -21,17 +22,12 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.*;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery.Builder;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.SearcherManager;
-import org.apache.lucene.search.SortField;
-import org.apache.lucene.search.TermQuery;
-import org.apache.lucene.search.TopDocs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.apache.lucene.search.Sort;
+import org.wltea.analyzer.lucene.IKAnalyzer;
 
 @Repository(value = "luceneDao")
 public class LuceneDaoImpl implements ILuceneDao {
@@ -54,7 +50,8 @@ public class LuceneDaoImpl implements ILuceneDao {
 
             doc.add(new TextField("name", p.getName(), Field.Store.YES));
             doc.add(new StringField("category", p.getCategory(), Field.Store.YES));
-            // 保存price,
+
+            // 保存price
             float price = p.getPrice();
             // 建立倒排索引
             doc.add(new FloatPoint("price", price));
@@ -65,6 +62,7 @@ public class LuceneDaoImpl implements ILuceneDao {
 
             doc.add(new TextField("place", p.getPlace(), Field.Store.YES));
             doc.add(new StringField("code", p.getCode(), Field.Store.YES));
+            doc.add(new StringField("describe", p.getCode(), Field.Store.YES));
             docs.add(doc);
         }
         indexWriter.addDocuments(docs);
@@ -104,17 +102,19 @@ public class LuceneDaoImpl implements ILuceneDao {
         if (params.getCategory() != null) {
             builder.add(new TermQuery(new Term("category", params.getCategory())), Occur.MUST);
         }
-        if (queryParam.get("lowerPrice") != null && queryParam.get("upperPrice") != null) {
-            // 价格范围查询
-            builder.add(FloatPoint.newRangeQuery("price", Float.parseFloat(queryParam.get("lowerPrice")),
-                    Float.parseFloat(queryParam.get("upperPrice"))), Occur.MUST);
+        if (queryParam != null) {
+            if (queryParam.get("lowerPrice") != null && queryParam.get("upperPrice") != null) {
+                // 价格范围查询
+                builder.add(FloatPoint.newRangeQuery("price", Float.parseFloat(queryParam.get("lowerPrice")),
+                        Float.parseFloat(queryParam.get("upperPrice"))), Occur.MUST);
+            }
         }
         PageInfo pageInfo = pageQuery.getPageInfo();
         TopDocs topDocs = indexSearcher.search(builder.build(), pageInfo.getPageNum() * pageInfo.getPageSize(), sort);
 
         pageInfo.setTotal(topDocs.totalHits);
         ScoreDoc[] hits = topDocs.scoreDocs;
-        List<Product> pList = new ArrayList<Product>();
+        List<Product> pList = new ArrayList<>();
         for (int i = 0; i < hits.length; i++) {
             Document doc = indexSearcher.doc(hits[i].doc);
             System.out.println(doc.toString());
@@ -129,6 +129,32 @@ public class LuceneDaoImpl implements ILuceneDao {
         }
         pageQuery.setResults(pList);
         return pageQuery;
+    }
+
+    @Override
+    public List<Product> searchProduct(String pram) throws IOException, ParseException {
+        List<Product> products = new ArrayList<>();
+        searcherManager.maybeRefresh();
+        IndexSearcher indexSearcher = searcherManager.acquire();
+        QueryParser parser = new QueryParser("describe", new IKAnalyzer());
+        Query query = parser.parse(pram);
+        TopDocs topDocs = indexSearcher.search(query, 100);
+        ScoreDoc[] scoreDocs = topDocs.scoreDocs;
+
+        for (ScoreDoc doc : scoreDocs) {
+            int id = doc.doc;
+            Document document = indexSearcher.doc(id);
+            Product product = new Product();
+            product.setId(Integer.parseInt(document.get("id")));
+            product.setCode(document.get("code"));
+            product.setName(document.get("name"));
+            product.setPlace(document.get("place"));
+            product.setPrice(Float.parseFloat(document.get("price")));
+            product.setCategory(document.get("category"));
+            product.setDescribe(document.get("describe"));
+            products.add(product);
+        }
+        return products;
     }
 
     @Override

@@ -35,4 +35,8 @@ public class LuceneServiceImpl implements ILuceneService {
 		return luceneDao.searchProduct(pageQuery);
 	}
 
+	@Override
+	public List<Product> searchProduct(String pram) throws IOException, ParseException {
+		return luceneDao.searchProduct(pram);
+	}
 }

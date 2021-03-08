@@ -20,7 +20,7 @@ public class PageInfo {
     @ApiModelProperty(value = "每页条数")
     private int pageSize;
 
-    @ApiModelProperty(value = "总总数")
+    @ApiModelProperty(value = "总数")
     private long total;
 
 }

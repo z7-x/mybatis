@@ -3,6 +3,7 @@ package com.example.mybatis.controller;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import com.example.mybatis.pojo.PageQuery;
 import com.example.mybatis.pojo.Product;
@@ -29,6 +30,13 @@ public class ProductSearchController {
 	private ResultBean<PageQuery<Product>> searchProduct(@RequestBody PageQuery<Product> pageQuery) throws IOException, ParseException {
 		PageQuery<Product> pageResult= service.searchProduct(pageQuery);
 		return ResultUtil.success(pageResult);
+	}
+
+	@ApiOperation(value = "查询商品", notes = "查询商品")
+	@RequestMapping(value = "/param", method = RequestMethod.GET)
+	private ResultBean<List<Product>> param(@RequestParam String param) throws IOException, ParseException {
+		List<Product> products = service.searchProduct(param);
+		return ResultUtil.success(products);
 	}
 	
 }

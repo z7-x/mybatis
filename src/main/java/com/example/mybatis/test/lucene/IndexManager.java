@@ -17,7 +17,7 @@ import java.io.File;
 
 /**
  * @Classname IndexManager
- * @Description TODO 索引库维护「添加文档、删除索引库、更新索引库」
+ * @Description TODO 索引库维护「添加文档、删除索引库、更新索引库
  * @Date 2021/3/1 2:15 下午
  * @Author z7-x
  */
@@ -40,9 +40,7 @@ public class IndexManager {
     @Test
     public void addDocument() throws Exception {
         //1、创建一个IndexWriter对象，需要用IKAnalyzer
-        IndexWriter indexWriter =
-                new IndexWriter(FSDirectory.open(new File("/Volumes/工作文档/spring/boot-test/springboot/z7-mybatis/lucene/indexResource").toPath()),
-                        new IndexWriterConfig(new IKAnalyzer()));
+        init();
         //2、创建一个document对象
         Document document = new Document();
         //3、向document对象中添加域

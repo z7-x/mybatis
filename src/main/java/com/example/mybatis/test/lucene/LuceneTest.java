@@ -155,7 +155,7 @@ public class LuceneTest {
         //1、创建一个Analyzer对象，StandardAnalyzer对象
         Analyzer analyzer = new IKAnalyzer();
         //2、使用分词器对象的tokenStream的方法获得TokenStream对象
-        TokenStream tokenStream = analyzer.tokenStream("", "传智播客Lucene是apache软件基金会4 jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，但它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供了完整的查询引擎和索引引擎，部分文本分析引擎（英文与德文两种西方语言）");
+        TokenStream tokenStream = analyzer.tokenStream("", "办公用品");
         //3、向tokenStream对象中设置一个引用，相当于数的一个指针
         CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
         //4、调用TokenStream对象的rest方法
@@ -185,8 +185,7 @@ public class LuceneTest {
         File file = new File("/Volumes/工作文档/spring/boot-test/springboot/z7-mybatis/lucene/dataResource");
         //4、向文档对象中添加域
         File[] files = file.listFiles();
-        Arrays.stream(files).forEach(f -> {
-            //取文件名
+        for (File f : files) {//取文件名
             String fileName = f.getName();
             //取文件路径
             String filePath = f.getPath();
@@ -223,7 +222,7 @@ public class LuceneTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+        }
         //6、关闭indexWriter对象
         indexWriter.close();
 

@@ -1,6 +1,7 @@
 package com.example.mybatis.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.example.mybatis.pojo.PageQuery;
 import com.example.mybatis.pojo.Product;
@@ -22,4 +23,7 @@ public interface ILuceneService {
 	 * @throws ParseException
 	 */
 	 PageQuery<Product> searchProduct(PageQuery<Product> pageQuery) throws IOException, ParseException;
+
+
+	List<Product> searchProduct(String pram) throws IOException, ParseException;
 }
