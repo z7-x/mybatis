@@ -25,6 +25,10 @@
         select * from mybatis_user where id = #{id}
     </select>
 
+    <select id="findUserByUserName" resultType="com.example.mybatis.pojo.User">
+        select * from mybatis_user where user_name = #{userName}
+    </select>
+
     <select id="getUserRoleList" resultMap="userRoleMap">
         select a.id,a.user_name,c.role_name from mybatis_user a
         inner join mybatis_user_role b on  a.id = b.user_id

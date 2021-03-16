@@ -44,7 +44,7 @@ public class AspectConfig {
     public void before(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         for (Object arg : args) {
-            System.out.println("参数为：" + arg);
+            System.out.println("前置通知...参数为：" + arg);
 
         }
     }
@@ -57,7 +57,7 @@ public class AspectConfig {
      */
     @AfterReturning(value = "log()", returning = "returnValue")
     public void returning(JoinPoint joinPoint, Object returnValue) {
-        System.out.println("结果为：" + returnValue);
+        System.out.println("返回通知...结果为：" + returnValue);
     }
 
 }

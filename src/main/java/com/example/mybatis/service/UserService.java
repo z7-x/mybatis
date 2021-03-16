@@ -25,4 +25,9 @@ public interface UserService {
     List<User> queryUsersByArray(int currPage, int pageSize);
 
     List<User> getUserRoleList();
+
+    /**
+     * 根据账号查询用户信息
+     */
+    User findUserByUserName(String userName);
 }

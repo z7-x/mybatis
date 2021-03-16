@@ -21,4 +21,9 @@ public interface RoleService {
     List<Role> getRoleUserList(int currPage, int pageSize);
 
     List<Role> getRolePermissionList();
+
+    /**
+     * 根据角色信息
+     */
+    Role findRoleByRoleName(String roleName);
 }

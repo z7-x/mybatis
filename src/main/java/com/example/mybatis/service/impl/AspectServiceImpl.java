@@ -13,10 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AspectServiceImpl {
 
+    /**
+     * 加法运算
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public int sum(int a, int b) {
-
         int sum = a + b;
-
         return sum;
     }
 }

@@ -28,4 +28,9 @@ public interface UserMapper {
      * 用户角色列表
      */
     List<User> getUserRoleList();
+
+    /**
+     * 根据账号查询用户信息
+     */
+    User findUserByUserName(String userName);
 }

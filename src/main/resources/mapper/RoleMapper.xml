@@ -34,4 +34,8 @@
         <result property="permissionName" column="permission_name"></result>
     </resultMap>
 
+    <select id="findRoleByRoleName" resultType="com.example.mybatis.pojo.Role">
+        select * from mybatis_role mr where  role_name = #{roleName}
+    </select>
+
 </mapper>

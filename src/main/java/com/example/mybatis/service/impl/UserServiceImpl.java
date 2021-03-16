@@ -57,4 +57,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getUserRoleList() {
         return userMapper.getUserRoleList();
     }
+
+    @Override
+    public User findUserByUserName(String userName) {
+        return userMapper.findUserByUserName(userName);
+    }
 }
