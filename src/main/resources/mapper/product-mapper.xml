@@ -15,7 +15,7 @@
 
 
     <select id="getProductList"
-            parameterType="com.example.mybatis.pojo.PageQuery"
+            parameterType="com.example.mybatis.pojo.result.PageQuery"
             resultType="com.example.mybatis.pojo.Product">
         SELECT id,name,category,price,place,code FROM mybatis_product
         <where>

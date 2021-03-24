@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.example.mybatis.dao.ILuceneDao;
 import com.example.mybatis.mapper.ProductMapper;
-import com.example.mybatis.pojo.PageQuery;
+import com.example.mybatis.pojo.result.PageQuery;
 import com.example.mybatis.pojo.Product;
 import com.example.mybatis.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;

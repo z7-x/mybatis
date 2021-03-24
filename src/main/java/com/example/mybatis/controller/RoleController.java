@@ -41,7 +41,6 @@ public class RoleController {
     @ApiOperation(value = "角色权限列表", notes = "查询所分配的角色的权限列表")
     @RequestMapping(value = "/getRolePermissions", method = RequestMethod.GET)
     public List<Role> getRolePermissionList() {
-
         return roleService.getRolePermissionList();
     }
 

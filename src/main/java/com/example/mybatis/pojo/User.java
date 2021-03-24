@@ -42,6 +42,10 @@ public class User {
         @ApiModelProperty(value = "用户密码")
         private String passWord;
 
+        @Column(name = "salt", comment = "盐",type = MySqlTypeConstant.VARCHAR,length = 255)
+        @ApiModelProperty(value = "盐")
+        private String salt;
+
         @ApiModelProperty(value = "所有用户所属的角色列表")
         private List<Role> roles;
 }

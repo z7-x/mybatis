@@ -26,6 +26,7 @@ public class ProductRunner implements ApplicationRunner {
 		/**
 		 * 启动后将同步Product表,并创建index
 		 */
+		System.out.println("创建索引库...");
 		iLuceneService.synProductCreatIndex();
 	}
 }

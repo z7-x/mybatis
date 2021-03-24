@@ -1,7 +1,7 @@
 package com.example.mybatis.exception;
 
-import com.example.mybatis.pojo.ResultBean;
-import com.example.mybatis.pojo.ResultEnum;
+import com.example.mybatis.pojo.result.ResultBean;
+import com.example.mybatis.pojo.result.ResultEnum;
 import com.example.mybatis.utils.ResultUtil;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

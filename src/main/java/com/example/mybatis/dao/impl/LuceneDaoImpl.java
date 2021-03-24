@@ -2,13 +2,12 @@ package com.example.mybatis.dao.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import com.example.mybatis.dao.ILuceneDao;
-import com.example.mybatis.pojo.PageInfo;
-import com.example.mybatis.pojo.PageQuery;
+import com.example.mybatis.pojo.result.PageInfo;
+import com.example.mybatis.pojo.result.PageQuery;
 import com.example.mybatis.pojo.Product;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
@@ -78,7 +77,7 @@ public class LuceneDaoImpl implements ILuceneDao {
         Builder builder = new Builder();
         Sort sort = new Sort();
         // 排序规则
-        com.example.mybatis.pojo.Sort sort1 = pageQuery.getSort();
+        com.example.mybatis.pojo.result.Sort sort1 = pageQuery.getSort();
         if (sort1 != null && sort1.getOrder() != null) {
             if ("ASC".equals((sort1.getOrder()).toUpperCase())) {
                 sort.setSort(new SortField(sort1.getField(), SortField.Type.FLOAT, false));

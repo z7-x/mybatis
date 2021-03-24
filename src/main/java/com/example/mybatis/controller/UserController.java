@@ -7,9 +7,16 @@ import com.example.mybatis.utils.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -80,5 +87,62 @@ public class UserController {
             return "成功";
         }
         return "失败";
+    }
+
+
+    @ApiOperation(value = "退出登录", notes = "退出登录")
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "退出成功";
+    }
+
+    @ApiOperation(value = "登录验证", notes = "处理身份认证")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(@ApiParam(value = "用户名", required = true)
+                        @RequestParam String username,
+                        @ApiParam(value = "密码", required = true)
+                        @RequestParam String password) {
+        //获取主体对象
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(new UsernamePasswordToken(username, password));
+            System.out.println("登录成功");
+        } catch (UnknownAccountException e) {
+            e.printStackTrace();
+            System.out.println("用户名错误!");
+        } catch (IncorrectCredentialsException e) {
+            e.printStackTrace();
+            System.out.println("密码错误!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+
+        List<String> strings = Arrays.asList("user", "product", "admin");
+        //认证用户进行授权
+        if (subject.isAuthenticated()) {
+            //基于角色
+            //1.基于角色权限控制：登录的用户是否具有"admin"的这个角色
+            System.out.println(subject.hasRole("admin"));
+            //2.基于多角色权限控制:依次判断，返回true或者false，是否拥有该角色
+            boolean[] roles = subject.hasRoles(strings);
+            Arrays.asList(roles).stream().forEach(isRole -> {
+                strings.stream().forEach(s -> {
+                    System.out.println("用户是否有" + s + "角色：" + isRole);
+                });
+            });
+            //3.检查是否拥有角色 subject.checkRoles();
+            //4.多个角色一起判断 hasAllRoles,需要同时具备所有权限
+            boolean b = subject.hasAllRoles(strings);
+            System.out.println(b);
+
+            //基于权限
+            //1.基于权限字符串的访问控制  资源标志符：操作：资源类型 subject.isPermittedAll("","");
+            System.out.println("权限"+ subject.isPermitted("user:update:01"));
+            System.out.println("权限"+ subject.isPermitted("product:*:01"));
+        }
+        return "redirect:/login.jsp";
     }
 }

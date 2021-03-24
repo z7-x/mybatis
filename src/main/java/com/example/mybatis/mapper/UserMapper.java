@@ -1,5 +1,6 @@
 package com.example.mybatis.mapper;
 
+import com.example.mybatis.pojo.Permission;
 import com.example.mybatis.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -33,4 +34,14 @@ public interface UserMapper {
      * 根据账号查询用户信息
      */
     User findUserByUserName(String userName);
+
+    /**
+     * 根据账号查询角色信息
+     */
+    User findRolesByUserName(String username);
+
+    /**
+     * 查询角色权限信息
+     */
+    List<Permission> findPermsByRoleId(Long id);
 }

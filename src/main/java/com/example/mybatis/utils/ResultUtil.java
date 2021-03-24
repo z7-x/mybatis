@@ -1,7 +1,7 @@
 package com.example.mybatis.utils;
 
-import com.example.mybatis.pojo.ResultBean;
-import com.example.mybatis.pojo.ResultEnum;
+import com.example.mybatis.pojo.result.ResultBean;
+import com.example.mybatis.pojo.result.ResultEnum;
 
 public class ResultUtil<T> {
 

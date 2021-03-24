@@ -1,6 +1,6 @@
 package com.example.mybatis.service;
 
-import com.example.mybatis.pojo.PageQuery;
+import com.example.mybatis.pojo.result.PageQuery;
 import com.example.mybatis.pojo.Product;
 
 import java.io.IOException;

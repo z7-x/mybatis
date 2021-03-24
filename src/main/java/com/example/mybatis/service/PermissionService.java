@@ -2,6 +2,8 @@ package com.example.mybatis.service;
 
 import com.example.mybatis.pojo.Permission;
 
+import java.util.List;
+
 /**
  * @Classname PermissionService
  * @Description TODO

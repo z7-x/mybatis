@@ -3,9 +3,11 @@
 <mapper namespace="com.example.mybatis.mapper.RoleMapper">
 
     <select id="getRoleUserList" parameterType="map" resultMap="roleUserMap">
-        select * from mybatis_role mr
-        inner join mybatis_user_role mur on mr.id = mur.role_id
-        inner join mybatis_user mu on mu.id = mur.user_id
+        SELECT * FROM mybatis_role mr
+            INNER JOIN mybatis_user_role mur ON mr.id = mur.role_id
+            INNER JOIN mybatis_user mu ON mu.id = mur.user_id
+            inner join mybatis_role_permission mrp on mrp.role_id = mr.id
+            inner join mybatis_permission mp on mp.id = mrp.permission_id
         limit  #{currIndex} , #{pageSize}
     </select>
 
@@ -20,18 +22,27 @@
         <id property="id" column="id"/>
         <result property="userName" column="user_name"/>
         <result property="passWord" column="pass_word"/>
+        <result property="salt" column="salt"/>
     </resultMap>
 
 
-    <select id="getRolePermissionList" resultMap="roleUserMap">
-        select * from mybatis_role mr
+    <select id="getRolePermissionList" resultMap="rolePermissions">
+        select  mr.id,mr.role_name,mp.id,mp.permission_name,mp.url
+        from mybatis_role mr
         inner join mybatis_role_permission mrp on mr.id = mrp.role_id
         inner join mybatis_permission mp on mp.id = mrp.permission_id
     </select>
 
+    <resultMap id="rolePermissions" type="com.example.mybatis.pojo.Role">
+        <id property="id" column="id"/>
+        <result property="roleName" column="role_name"/>
+        <collection property="permissions" resultMap="rolePermissionMap"></collection>
+    </resultMap>
+
     <resultMap id="rolePermissionMap" type="com.example.mybatis.pojo.Permission">
         <id property="id" column="id"></id>
         <result property="permissionName" column="permission_name"></result>
+        <result property="url" column="url"></result>
     </resultMap>
 
     <select id="findRoleByRoleName" resultType="com.example.mybatis.pojo.Role">

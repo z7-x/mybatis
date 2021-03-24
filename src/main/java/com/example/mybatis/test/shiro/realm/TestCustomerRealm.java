@@ -48,5 +48,11 @@ public class TestCustomerRealm {
         } catch (AuthenticationException e) {
             e.printStackTrace();
         }
+
+        //授权
+        if (subject.isAuthenticated()) {
+            //基于角色控制
+            System.out.println("授权" + subject.hasRole("admin"));
+        }
     }
 }

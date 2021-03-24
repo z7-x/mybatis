@@ -1,7 +1,6 @@
 package com.example.mybatis.service.impl;
 
 import com.example.mybatis.pojo.Permission;
-import com.example.mybatis.pojo.Role;
 import com.example.mybatis.service.PermissionService;
 
 /**

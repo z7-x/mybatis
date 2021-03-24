@@ -5,9 +5,9 @@ package com.example.mybatis.controller;
 import java.io.IOException;
 import java.util.List;
 
-import com.example.mybatis.pojo.PageQuery;
+import com.example.mybatis.pojo.result.PageQuery;
 import com.example.mybatis.pojo.Product;
-import com.example.mybatis.pojo.ResultBean;
+import com.example.mybatis.pojo.result.ResultBean;
 import com.example.mybatis.service.ILuceneService;
 import com.example.mybatis.utils.ResultUtil;
 import io.swagger.annotations.Api;

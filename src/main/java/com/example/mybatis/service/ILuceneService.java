@@ -3,7 +3,7 @@ package com.example.mybatis.service;
 import java.io.IOException;
 import java.util.List;
 
-import com.example.mybatis.pojo.PageQuery;
+import com.example.mybatis.pojo.result.PageQuery;
 import com.example.mybatis.pojo.Product;
 import org.apache.lucene.queryparser.classic.ParseException;
 

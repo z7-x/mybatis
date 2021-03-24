@@ -31,4 +31,8 @@ public class Permission implements Serializable {
     @Column(name = "permission_name", comment = "权限名称")
     @ApiModelProperty(value = "权限名称")
     private String permissionName;
+
+    @Column(name = "url", comment = "权限对应的资源")
+    @ApiModelProperty(value = "权限对应的资源")
+    private String url;
 }

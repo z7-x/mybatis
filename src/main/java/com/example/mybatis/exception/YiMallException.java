@@ -1,7 +1,7 @@
 package com.example.mybatis.exception;
 
 
-import com.example.mybatis.pojo.ResultEnum;
+import com.example.mybatis.pojo.result.ResultEnum;
 
 public class YiMallException extends RuntimeException {
 

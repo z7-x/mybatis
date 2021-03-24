@@ -2,7 +2,7 @@ package com.example.mybatis.mapper;
 
 import java.util.List;
 
-import com.example.mybatis.pojo.PageQuery;
+import com.example.mybatis.pojo.result.PageQuery;
 import com.example.mybatis.pojo.Product;
 import org.apache.ibatis.annotations.Mapper;
 

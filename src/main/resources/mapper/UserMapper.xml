@@ -6,8 +6,8 @@
         SELECT * FROM mybatis_user
     </select>
 
-    <insert id="addUser" parameterType="com.example.mybatis.pojo.User">
-        insert into mybatis_user(user_name,pass_word) values(#{userName},#{passWord})
+    <insert id="addUser" parameterType="com.example.mybatis.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        insert into mybatis_user(user_name,pass_word,salt) values(#{userName},#{passWord},#{salt})
     </insert>
 
     <delete id="removeUser" parameterType="java.lang.Long">
@@ -26,7 +26,7 @@
     </select>
 
     <select id="findUserByUserName" resultType="com.example.mybatis.pojo.User">
-        select * from mybatis_user where user_name = #{userName}
+         select id,user_name,pass_word,salt from mybatis_user  where user_name = #{userName}
     </select>
 
     <select id="getUserRoleList" resultMap="userRoleMap">
@@ -44,4 +44,28 @@
             <result property="roleName" column="role_name"/>
         </collection>
     </resultMap>
+
+    <select id="findRolesByUserName" parameterType="String" resultMap="userRoles">
+         select u.id uid,u.user_name,r.id,r.role_name  from mybatis_user u
+            inner join mybatis_user_role ur  on ur.user_id = u.id
+            inner join mybatis_role r on r.id = ur.role_id
+            where u.user_name = #{userName}
+    </select>
+    <resultMap id="userRoles" type="com.example.mybatis.pojo.User">
+        <id column="uid" property="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="passWord" column="pass_word"/>
+        <result property="salt" column="salt"/>
+        <collection property="roles" ofType="com.example.mybatis.pojo.Role">
+            <id property="id" column="id"/>
+            <result property="roleName" column="role_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="findPermsByRoleId" resultType="com.example.mybatis.pojo.Permission" parameterType="long">
+        select b.id,b.permission_name,b.url from mybatis_role_permission a
+        inner join mybatis_permission b on a.permission_id = b.id
+        inner join mybatis_role c on c.id = a.role_id
+        where a.role_id = #{id}
+    </select>
 </mapper>

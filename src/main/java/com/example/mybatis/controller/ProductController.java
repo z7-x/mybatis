@@ -3,10 +3,10 @@ package com.example.mybatis.controller;
 import java.io.IOException;
 import java.util.List;
 
-import com.example.mybatis.pojo.PageInfo;
-import com.example.mybatis.pojo.PageQuery;
+import com.example.mybatis.pojo.result.PageInfo;
+import com.example.mybatis.pojo.result.PageQuery;
 import com.example.mybatis.pojo.Product;
-import com.example.mybatis.pojo.ResultBean;
+import com.example.mybatis.pojo.result.ResultBean;
 import com.example.mybatis.service.IProductService;
 import com.example.mybatis.utils.ResultUtil;
 import com.github.pagehelper.Page;

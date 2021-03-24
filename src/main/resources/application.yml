@@ -43,10 +43,8 @@ mybatis:
 # 配置日志信息
 logging:
   level:
-    com:
-      example:
-        mybatis:
-          mapper: debug
+    root: info
+    com.example.mybatis.mapper: debug
 
 #grpc相关配置
 grpc:
