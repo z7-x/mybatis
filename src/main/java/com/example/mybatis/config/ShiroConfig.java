@@ -1,17 +1,14 @@
-package com.example.mybatis.config.shrio;
+package com.example.mybatis.config;
 
+
+import com.example.mybatis.shrio.realm.UserRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.cache.RedisCacheManager;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.example.mybatis.shrio.cache.RedisCacheManager;
 
 /**
  * 用来整合shiro框架相关的配置类
@@ -60,8 +57,8 @@ public class ShiroConfig {
         //设置散列次数
         credentialsMatcher.setHashIterations(1024);
 
-        //开启缓存管理：EhCache
-        userRealm.setCacheManager(new EhCacheManager());
+        //开启缓存管理：EhCacheManager()
+        userRealm.setCacheManager(new RedisCacheManager());
         userRealm.setCachingEnabled(true);//开启全局缓存
         userRealm.setAuthenticationCachingEnabled(true);//认证认证缓存
         userRealm.setAuthenticationCacheName("authenticationCache");//给认证缓存起一个名字

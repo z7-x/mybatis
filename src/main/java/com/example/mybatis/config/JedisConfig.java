@@ -44,8 +44,8 @@ public class JedisConfig {
         config.setMinIdle(minIdle);
         JedisPool jedisPool = new JedisPool(config, host, port, timeout, password);
 
-        System.out.println("JedisPool生成成功！");
-        System.out.println("Redis地址：" + host + ":" + port);
+        System.out.println("Redis 连接成功！");
+        System.out.println("Redis 地址：" + host + ":" + port);
 
         return jedisPool;
     }

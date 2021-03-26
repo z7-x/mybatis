@@ -16,6 +16,7 @@ import java.util.Map;
  */
 @Component
 public class JedisUtil {
+
     @Autowired
     private JedisPool jedisPool;
 

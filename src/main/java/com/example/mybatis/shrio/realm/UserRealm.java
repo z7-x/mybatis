@@ -1,9 +1,8 @@
-package com.example.mybatis.config.shrio;
+package com.example.mybatis.shrio.realm;
 
 import com.example.mybatis.pojo.Permission;
 import com.example.mybatis.pojo.Role;
 import com.example.mybatis.pojo.User;
-import com.example.mybatis.service.PermissionService;
 import com.example.mybatis.service.UserService;
 import com.example.mybatis.utils.ApplicationContextUtils;
 import org.apache.shiro.authc.AuthenticationException;

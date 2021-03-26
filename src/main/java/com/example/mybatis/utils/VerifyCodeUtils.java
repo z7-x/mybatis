@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * @创建人 cx
- * @创建时间 2018/11/27 17:36
+ * @创建人 z7
+ * @创建时间 2020/11/27 17:36
  * @描述 验证码生成
  */
 public class VerifyCodeUtils {
@@ -264,11 +264,12 @@ public class VerifyCodeUtils {
 
     }
 
+
     public static void main(String[] args) throws IOException {
         //获取验证码
         String s = generateVerifyCode(4);
-        //将验证码放入图片中
-        outputImage(260, 60, new File("/Users/chenyannan/Desktop/安工资料/aa.jpg"), s);
+        //将验证码放入图片中 本地路径，需指定一张图片
+        outputImage(260, 60, new File("/Users/apple/Pictures/pap.er/M5VqCeKC3vk.jpg"), s);
         System.out.println(s);
     }
 }

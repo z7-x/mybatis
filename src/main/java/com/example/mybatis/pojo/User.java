@@ -2,6 +2,7 @@ package com.example.mybatis.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
@@ -12,6 +13,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -26,7 +28,8 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "mybatis_user")
 @ApiModel(value = "人员信息")
-public class User {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class User implements Serializable {
         private static final long serialVersionUID = 5199200306752426433L;
 
         @TableId(type = IdType.AUTO) //mybatis-plus主键注解

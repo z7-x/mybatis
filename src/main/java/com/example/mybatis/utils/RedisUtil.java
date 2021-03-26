@@ -30,7 +30,7 @@ public class RedisUtil {
 
     @PostConstruct
     public void initialize() {
-        System.out.println("初始化环境...");
+        System.out.println("初始化Redis环境...");
         redisTemplate = this.redisTemplates;
     }
 

@@ -2,6 +2,7 @@ package com.example.mybatis.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import io.swagger.annotations.ApiModel;
@@ -20,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "mybatis_role")
 @ApiModel(value = "角色表")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 5199200306752426433L;
