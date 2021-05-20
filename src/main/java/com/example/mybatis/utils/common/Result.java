@@ -23,7 +23,7 @@ public class Result<T> implements Serializable {
     @ApiModelProperty(value = "返回数据")
     protected T data;
 
-    @ApiModelProperty(value = "返回消息", example = "ok")
+    @ApiModelProperty(value = "返回消息", example = "OK")
     protected String msg;
 
     public Result(Integer code, String msg, T data) {
